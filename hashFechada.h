@@ -1,22 +1,25 @@
 #ifndef hashFechada_h
 #define hashFechada_h
-
 #include <stdio.h>
 #include "lista.h"
 
-typedef struct hashFechada{
+typedef struct HashFechada{
     list *dados;
     int tamanho;
-}THashFechada;
+}hashFechada;
 
 //Aloca uma lista e a inicializa.
-THashFechada* criarHashFechada(int tamanho);
+hashFechada* criarHashFechada(int tamanho);
 
-int hashFunction (THashFechada* h, int chave);
+int hashFunction (hashFechada* h, int chave);
 
-void inserirNaHashFechada(THashFechada* h, TAluno *a);
+void inserirNaHashFechada(char id, hashFechada* h, void * a,  int (*returnChave)(void *, char), int (*comp)(char, node *, node *));
 
-void imprimirHashFechada(THashFechada* h);
+void imprimirHashFechada(hashFechada* h, void (*print)(char, void *));
+
+void excluiHashFechada(hashFechada* h);
+
+void pesquisaNaHash(hashFechada *h, int matricula);
 
 
 #endif /* hashFechada_h */

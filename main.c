@@ -1,7 +1,7 @@
-#include "people.h"
+#include "aluno.h"
 
 int main(){
-    list *l=listInitialized();
+    list *l=createList();
     start(l);
     printAllList(l);
     printf("\n\nO tamanho da lista eh: %d\n\n", l->tam);

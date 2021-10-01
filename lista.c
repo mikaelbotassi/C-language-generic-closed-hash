@@ -1,12 +1,16 @@
 #include "lista.h"
 
 //Função para Iniciar a lista e atribuir um NULL pra o primeiro e ultimo nó;
-list * listInitialized(){
+list * createList(){
     list *l= (list *)malloc(sizeof(list));
+    listInitialized(l);
+    return l;
+}
+
+void * listInitialized(list *l){
     l->first=NULL;
     l->last=NULL;
     l->tam=0;
-    return l;
 }
 
 node * nodeInitialized(){
@@ -61,7 +65,7 @@ void push(char id,list *l, void *elem, int(*comp)(char, node *, node *)){
 Percorre a lista procurando elemento que possui a altura igual o elemento atual da busca,
 a comparação é feita através da função CompareAge(Procure na biblioteca people)
 */
-void listSearch(list * l, int age, int(*cmpAge)(int age, void *elem, char id), void(*print)(char id, void *elem)){
+void listSearch(list * l, int matricula, int(*cmpMatricula)(int, void *, char), void(*print)(char, void *)){
     node *aux = l->first;
     char resp;
     if(aux==NULL){
@@ -69,7 +73,7 @@ void listSearch(list * l, int age, int(*cmpAge)(int age, void *elem, char id), v
     }
     else{
         while(aux!=NULL){
-            if(cmpAge(age, aux->elemen, aux->id)){
+            if(cmpMatricula(matricula, aux->elemen, aux->id)){
                 print(aux->id, aux->elemen);
                 printf("Deseja excluir o elemento?Digite 's' para sim e 'n' para nao: ");
                 scanf(" %c", &resp);

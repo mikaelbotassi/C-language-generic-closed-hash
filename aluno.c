@@ -8,16 +8,16 @@ aluno * allocAluno(){
     return p;
 }
 
-void start(list *l){
+void start(hashFechada *h){
     char res='s';
     while(res!='s'){
-        alunoInsert(l);
+        alunoInsert(h);
         printf("Deseja Inserir mais um aluno?Digite 's' para sim e 'n' para nao: ");
         scanf("%c", &res);
     }
 }
 
-void insertAluno(list * l){
+void insertAluno(hashFechada *h){
     aluno * p = alunoInitialized();
     printf("\nDigite a altura da pessoa: ");
     scanf("%d", &p->matricula);
@@ -25,7 +25,7 @@ void insertAluno(list * l){
     scanf(" %31[^\n]", &p->nome);
     printf("\nDigite a nota do aluno: ");
     scanf("%d", &p->nota);
-    push('A',l, p, cmp);
+    inserirNaHashFechada('A', h, p, returnChave, cmp);
 }
 
 int descobreTipo(char id){
@@ -96,11 +96,22 @@ void printAluno(char id, void *elem){
     }
 }
 
-void printAllList(list *l){
-    if(l->first==NULL){
-        printf("Lista vazia!\n");
+void printAllHash(hashFechada *h){
+    if(h->tamanho==0){
+        printf("Hash vazia!\n");
     }
     else{
-        printList(l, printAluno);
+        imprimirHashFechada(h, printAluno);
+    }
+}
+
+int returnChave(void * elem, char id){
+    if(descobreTipo(id)){
+        aluno * a = elem;
+        return a->matricula;
+    }
+    else{
+        printf("\nDigite mais setenças de tipos de chaves! \n");
+        return 0;
     }
 }
