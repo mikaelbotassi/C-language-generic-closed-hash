@@ -18,7 +18,7 @@ typedef struct List{
 }list;
 
 list * createList();
-void * listInitialized(list *l);
+void listInitialized(list *l);
 node * nodeInitialized();
 void push(char id,list * l, void * elem, int(*comp)(char, node *, node *));
 void listSearch(list * l, int age, int(*cmpMatricula)(int, void *, char), void(*print)(char, void *));

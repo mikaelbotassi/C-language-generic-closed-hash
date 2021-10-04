@@ -1,5 +1,14 @@
 #include "aluno.h"
 
+void start(hashFechada *h){
+    char res='s';
+    while(res =='s'){
+        insertAluno(h);
+        printf("Deseja Inserir mais um aluno?Digite 's' para sim e 'n' para nao: ");
+        scanf(" %c", &res);
+    }
+}
+
 aluno * allocAluno(){
     aluno * p=(aluno *)malloc(sizeof(aluno));
     p->matricula=0;
@@ -8,22 +17,13 @@ aluno * allocAluno(){
     return p;
 }
 
-void start(hashFechada *h){
-    char res='s';
-    while(res!='s'){
-        alunoInsert(h);
-        printf("Deseja Inserir mais um aluno?Digite 's' para sim e 'n' para nao: ");
-        scanf("%c", &res);
-    }
-}
-
 void insertAluno(hashFechada *h){
-    aluno * p = alunoInitialized();
-    printf("\nDigite a altura da pessoa: ");
+    aluno * p = allocAluno();
+    printf("\nDigite a matricula do aluno: ");
     scanf("%d", &p->matricula);
     printf("Digite o nome do aluno: ");
     scanf(" %31[^\n]", &p->nome);
-    printf("\nDigite a nota do aluno: ");
+    printf("Digite a nota do aluno: ");
     scanf("%d", &p->nota);
     inserirNaHashFechada('A', h, p, returnChave, cmp);
 }
@@ -59,11 +59,11 @@ int cmp(char id, node * n1, node *n2){
     }
 }
 
-void alunoSearch(list *l){
+void alunoSearch(hashFechada *h){
     int age;
-    printf("\nQual a idade da pessoa que voce quer procurar? ");
+    printf("\nQual a matricula da pessoa que voce quer procurar? ");
     scanf("%d", &age);
-    listSearch(l, age, matriculaCompare, printAluno);
+    pesquisaNaHash(h, age, matriculaCompare, printAluno);
 }
 
 int matriculaCompare(int matricula, void * elem, char id){

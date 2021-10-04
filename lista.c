@@ -7,7 +7,7 @@ list * createList(){
     return l;
 }
 
-void * listInitialized(list *l){
+void listInitialized(list *l){
     l->first=NULL;
     l->last=NULL;
     l->tam=0;

@@ -19,7 +19,7 @@ void imprimirHashFechada(hashFechada* h, void (*print)(char, void *));
 
 void excluiHashFechada(hashFechada* h);
 
-void pesquisaNaHash(hashFechada *h, int matricula);
+void pesquisaNaHash(hashFechada *h, int matricula, int(*cmpMatricula)(int, void *, char), void(*print)(char, void *));
 
 
 #endif /* hashFechada_h */

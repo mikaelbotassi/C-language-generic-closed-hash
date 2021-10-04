@@ -11,7 +11,7 @@ hashFechada* criarHashFechada(int tamanho){
     int i;
     hashFechada *h = (hashFechada *)malloc(sizeof(hashFechada));
     h->tamanho = tamanho;
-    h->dados = (list *) malloc(tamanho*sizeof(list));
+    h->dados = (list *) malloc(tamanho * sizeof(list));
     for(i=0;i<tamanho;i++){
         listInitialized(&h->dados[i]);
     }
@@ -30,8 +30,10 @@ void inserirNaHashFechada(char id, hashFechada* h, void * a, int (*returnChave)(
 void imprimirHashFechada(hashFechada* h, void (*print)(char, void *)){
     int i;
     for(i=0;i<h->tamanho;i++){
-        printf("\nIndice:%d", i);
-        printList(&(h->dados[i]), print);//Passa a lista do índice e juntamente passa o ponteiro para a função de printar aluno.
+        if(h->dados[i].first!=NULL){
+            printf("\nIndice:%d", i);
+            printList(&(h->dados[i]), print);//Passa a lista do índice e juntamente passa o ponteiro para a função de printar aluno.
+        }
     }
 }
 
@@ -40,6 +42,7 @@ void excluiHashFechada(hashFechada* h){
     for(i=0;i<h->tamanho;i++){
         printf("\nIndice:%d", i);
         pop(&(h->dados[i]),h->dados[i].first);
+        free(&(h->dados[i]));
     }
 }
 
@@ -47,6 +50,6 @@ void pesquisaNaHash(hashFechada *h, int matricula, int(*cmpMatricula)(int, void 
     int i;
     for(i=0;i<h->tamanho;i++){
         printf("\nIndice:%d", i);
-        listSearch(&(h->dados[i]), matricula, )
+        listSearch(&(h->dados[i]), matricula, cmpMatricula, print);
     }
 }

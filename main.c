@@ -1,14 +1,9 @@
 #include "aluno.h"
 
 int main(){
-    list *l=createList();
-    start(l);
-    printAllList(l);
-    printf("\n\nO tamanho da lista eh: %d\n\n", l->tam);
-    peopleSearch(l);
-    printAllList(l);
-    freeList(l);
-    printAllList(l);
+    hashFechada *h=criarHashFechada(100);
+    start(h);
+    printAllHash(h);
 
     return 0;
 }

@@ -16,10 +16,10 @@ aluno * allocAluno();
 void insertAluno(hashFechada * h);
 int descobreTipo(char id);
 int cmp(char id, node * n1, node *n2);
-void alunoSearch(list *l);
-int matriculacompare(int matricula, void * elem, char id);
+void alunoSearch(hashFechada *h);
+int matriculaCompare(int matricula, void * elem, char id);
 void printAluno(char id, void *elem);
-void printAllList(list *l);
+void printAllHash(hashFechada *h);
 int returnChave(void * elem, char id);
 
 #endif
