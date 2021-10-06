@@ -14,11 +14,11 @@ typedef struct Aluno{
 
 void start(hashFechada *h1, hashFechada *h2);
 aluno * allocAluno();
-void newAluno(hashFechada * h);
+void newAluno(hashFechada * h1, hashFechada *h2);
 void insertAluno(hashFechada * h, aluno *a);
 int descobreTipo(char id);
 int cmp(char id, node * n1, node *n2);
-void alunoSearch(hashFechada *h);
+void alunoSearch(hashFechada *h1, hashFechada *h2);
 int matriculaCompare(int matricula, void * elem, char id);
 void printAluno(char id, void *elem);
 void printAllHash(hashFechada *h);

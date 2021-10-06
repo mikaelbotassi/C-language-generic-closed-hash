@@ -89,10 +89,10 @@ float mediaElementosIndice(hashFechada * h){
 
 void descobreIndiceMaiorMenor(hashFechada * h){
     int i;
-    int maior=-1;
-    int menor = 99999;
-    int elementosMaior;
-    int elementosMenor;
+    int maior=0;
+    int menor = 0;
+    int elementosMaior = -1;
+    int elementosMenor = 99999999;
     for(i=0; i<h->tamanho; i++){
         if(h->dados[i].tam>elementosMaior){
             maior=i;

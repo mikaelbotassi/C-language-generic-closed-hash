@@ -4,28 +4,22 @@ void start(hashFechada *h1, hashFechada *h2){
     int res=5;
     while(res !=4){
         printf("\n 1 - EXIBIR ESTATISTICAS;");
-        printf("\n 2 - EFETUAR BUSCA POR MATRÍCULA;");
+        printf("\n 2 - EFETUAR BUSCA POR MATRICULA;");
         printf("\n 3 - INCLUIR ALUNO;");
         printf("\n 4 - SAIR");
 
-        printf("Digite o numero correspondente a funcao que deseja utilizar: ");
+        printf("\nDigite o numero correspondente a funcao que deseja utilizar: ");
         scanf(" %d", &res);
         
         if(res==1){
             exibeEstatisticas(h1, h2);
         }
         if(res==2){
-            printf("\nProcurando aluno na Hash de tamanho '%d'...", h1->tamanho);
-            alunoSearch(h1);
-            printf("\nProcurando aluno na Hash de tamanho '%d'...", h2->tamanho);
-            alunoSearch(h2);
+            alunoSearch(h1, h2);
         }
 
         if(res==3){
-            printf("\nIncluindo aluno na Hash de tamanho '%d'...", h1->tamanho);
-            newAluno(h1);
-            printf("\nIncluindo aluno na Hash de tamanho '%d'...", h2->tamanho);
-            newAluno(h2);
+            newAluno(h1, h2);
         }
     }
 }
@@ -38,7 +32,7 @@ aluno * allocAluno(){
     return p;
 }
 
-void newAluno(hashFechada * h){
+void newAluno(hashFechada * h1, hashFechada *h2){
     aluno * p = allocAluno();
     printf("\nDigite a matricula do aluno: ");
     scanf("%d", &p->matricula);
@@ -46,7 +40,8 @@ void newAluno(hashFechada * h){
     scanf(" %31[^\n]", &p->nome);
     printf("Digite a nota do aluno: ");
     scanf("%d", &p->nota);
-    insertAluno(h, p);
+    insertAluno(h1, p);
+    insertAluno(h2, p);
 }
 
 void insertAluno(hashFechada *h, aluno * a){
@@ -84,11 +79,12 @@ int cmp(char id, node * n1, node *n2){
     }
 }
 
-void alunoSearch(hashFechada *h){
+void alunoSearch(hashFechada *h1, hashFechada *h2){
     int age;
     printf("\nQual a matricula da pessoa que voce quer procurar? ");
     scanf("%d", &age);
-    pesquisaNaHash(h, age, matriculaCompare, printAluno);
+    pesquisaNaHash(h1, age, matriculaCompare, printAluno);
+    pesquisaNaHash(h2, age, matriculaCompare, printAluno);
 }
 
 int matriculaCompare(int matricula, void * elem, char id){

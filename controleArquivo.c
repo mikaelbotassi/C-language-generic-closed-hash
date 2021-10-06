@@ -47,7 +47,6 @@ void writeAlunosOnFile(FILE *fp, hashFechada *hash) {
     for (int index = 0; index < hash->tamanho; ++index) {
         lista = &(hash->dados[index]);
         no = lista->first;
-        printf("\n%d", lista->tam);
 
         while (no != NULL) {
             a = no->elemen;
