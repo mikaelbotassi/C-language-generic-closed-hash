@@ -21,7 +21,7 @@ list * createList();
 void listInitialized(list *l);
 node * nodeInitialized();
 void push(char id,list * l, void * elem, int(*comp)(char, node *, node *));
-void listSearch(list * l, int age, int(*cmpMatricula)(int, void *, char), void(*print)(char, void *));
+node * listSearch(list * l, int age, int(*cmpMatricula)(int, void *, char));
 void pop(list *l, node * n);
 void freeList(list *l);
 void printList(list *l, void(*print)(char, void *));

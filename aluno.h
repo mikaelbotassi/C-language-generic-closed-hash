@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include<math.h>
 #include "hashFechada.h"
 #ifndef _ALUNO_H
 #define _ALUNO_H
@@ -11,9 +12,10 @@ typedef struct Aluno{
     int nota;
 }aluno;
 
-void start(hashFechada *h);
+void start(hashFechada *h1, hashFechada *h2);
 aluno * allocAluno();
-void insertAluno(hashFechada * h);
+void newAluno(hashFechada * h);
+void insertAluno(hashFechada * h, aluno *a);
 int descobreTipo(char id);
 int cmp(char id, node * n1, node *n2);
 void alunoSearch(hashFechada *h);

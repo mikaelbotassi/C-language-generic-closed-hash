@@ -2,11 +2,11 @@ CC = gcc
 flags = -c -Wall
 CFLAGS = -lm
 ARQUIVOS = *.o
-OBJS = lista.o hashFechada.o aluno.o main.o
+OBJS = lista.o hashFechada.o controleArquivo.o aluno.o main.o
 EXE = main
 MAIN = main.c
 
-all: lista.o hashFechada.o aluno.o main.o
+all: lista.o hashFechada.o controleArquivo.o aluno.o main.o
 	$(CC) $(OBJS) -o $(EXE)
 
 main.o: main.c
@@ -17,6 +17,9 @@ lista.o: lista.c
 
 hashFechada.o: hashFechada.c
 	$(CC) $(flags) hashFechada.c $(CFLAGS)
+
+controleArquivo.o: controleArquivo.c
+	$(CC) $(flags) controleArquivo.c $(CFLAGS)
 
 aluno.o: aluno.c
 	$(CC) $(flags) aluno.c $(CFLAGS)

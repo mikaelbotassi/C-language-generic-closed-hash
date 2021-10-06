@@ -65,31 +65,23 @@ void push(char id,list *l, void *elem, int(*comp)(char, node *, node *)){
 Percorre a lista procurando elemento que possui a altura igual o elemento atual da busca,
 a comparação é feita através da função CompareAge(Procure na biblioteca people)
 */
-void listSearch(list * l, int matricula, int(*cmpMatricula)(int, void *, char), void(*print)(char, void *)){
+node * listSearch(list * l, int matricula, int(*cmpMatricula)(int, void *, char)){
     node *aux = l->first;
-    char resp;
     if(aux==NULL){
         printf("\nLista Vazia!\n");
     }
     else{
         while(aux!=NULL){
             if(cmpMatricula(matricula, aux->elemen, aux->id)){
-                print(aux->id, aux->elemen);
-                printf("Deseja excluir o elemento?Digite 's' para sim e 'n' para nao: ");
-                scanf(" %c", &resp);
-                if(resp=='s'){
-                    pop(l, aux);
-                    break;
-                }
-                else{
-                    break;
-                }
+                return aux;
             }
             else{
                 aux=aux->prox;
             }
+        }
+        printf("\nO Aluno com esta matrícula não existe! ");
     }
-    }
+    return aux;
 
 }
 /*
