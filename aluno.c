@@ -1,5 +1,8 @@
 #include "aluno.h"
 
+/*
+Função de menu, esta função chama as outras funções dependendo da resposta do usuário.
+*/
 void start(hashFechada *h1, hashFechada *h2){
     int res=5;
     while(res !=4){
@@ -32,7 +35,7 @@ aluno * allocAluno(){
     return p;
 }
 
-void newAluno(hashFechada * h1, hashFechada *h2){
+void newAluno(hashFechada * h1, hashFechada *h2){//Caso o usuário queira inserir um aluno novo sem leitura de arquivos
     aluno * p = allocAluno();
     printf("\nDigite a matricula do aluno: ");
     scanf("%d", &p->matricula);
@@ -49,6 +52,10 @@ void insertAluno(hashFechada *h, aluno * a){
 }
 
 int descobreTipo(char id){
+/*
+Esta função pega o tipo de dado passado pelo variavel, neste caso
+como quero trabalhar apenas com aluno, recdbo apenas o tipo 'A' ou 'a'
+*/
     if(id=='A' || id=='a'){
         return 1;
     }
@@ -58,15 +65,19 @@ int descobreTipo(char id){
 }
 
 int cmp(char id, node * n1, node *n2){
+/*
+Nesta função, chamada pela biblioteca de lista basicamente compara o nó atual com o novo nó
+que se quer inserir, o novo nó é o node *n1 e o no atual que se compara o valor é o n2.
+*/
     if(descobreTipo(id)){
         if(n2!=NULL){
-            aluno *p1=n1->elemen;
+            aluno *p1=n1->elemen;//faz o cash dos valores dos dois nós
             aluno *p2=n2->elemen;
-            if(p1->matricula>p2->matricula){
+            if(p1->matricula>p2->matricula){//Se for maior anda pra frente na estrutura lista
                 return 1;
             }
             else{
-                return 0;
+                return 0;//Se for menor retorna falso e para de andar a lista
             }
         }
         else{
@@ -79,7 +90,7 @@ int cmp(char id, node * n1, node *n2){
     }
 }
 
-void alunoSearch(hashFechada *h1, hashFechada *h2){
+void alunoSearch(hashFechada *h1, hashFechada *h2){//Procura o aluno pela matricula
     int age;
     printf("\nQual a matricula da pessoa que voce quer procurar? ");
     scanf("%d", &age);
@@ -87,7 +98,7 @@ void alunoSearch(hashFechada *h1, hashFechada *h2){
     pesquisaNaHash(h2, age, matriculaCompare, printAluno);
 }
 
-int matriculaCompare(int matricula, void * elem, char id){
+int matriculaCompare(int matricula, void * elem, char id){//função de comparar pra ver se as matriculas são iguais
     if(descobreTipo(id)){
         aluno *p=elem;
         if(p->matricula==matricula){
@@ -112,7 +123,7 @@ void printAluno(char id, void *elem){
         printf("\n");
 
     }
-    else{
+    else{//Caso a variavel não seja do tipo aluno
         printf("\nDigite mais sentenças! ");
     }
 }
@@ -127,9 +138,9 @@ void printAllHash(hashFechada *h){
 }
 
 int returnChave(void * elem, char id){
-    if(descobreTipo(id)){
+    if(descobreTipo(id)){// É do tipo aluno?
         aluno * a = elem;
-        return a->matricula;
+        return a->matricula;//Se sim retorna a matricula do aluno, a "chave" para a inserção
     }
     else{
         printf("\nDigite mais setenças de tipos de chaves! \n");

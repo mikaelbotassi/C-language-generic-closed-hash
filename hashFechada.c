@@ -2,7 +2,7 @@
 //  hashFechada.c
 //  LibLista 
 //
-//  Created by Victorio Carvalho on 29/09/21.
+//  Created by Mikael Botassi de Oliveira on 07/10/21.
 //
 
 #include "hashFechada.h"
@@ -39,7 +39,7 @@ void imprimirHashFechada(hashFechada* h, void (*print)(char, void *)){
 
 void excluiHashFechada(hashFechada* h){
     int i;
-    for(i=0;i<h->tamanho;i++){
+    for(i=0;i<h->tamanho;i++){//Anda pela hash dando free nos indices
         printf("\nIndice:%d", i);
         pop(&(h->dados[i]),h->dados[i].first);
         free(&(h->dados[i]));
@@ -48,7 +48,7 @@ void excluiHashFechada(hashFechada* h){
 
 void excluiAlunoHashFechada(hashFechada *h, int matricula, int(*cmpMatricula)(int, void *, char)){
     int indice = hashFunction(h, matricula);
-    node * n = listSearch(&(h->dados[indice]), matricula, cmpMatricula);;
+    node * n = listSearch(&(h->dados[indice]), matricula, cmpMatricula);;//chama a função da bibloteca lista procurando o aluno que tiver a matricula passada e retorna o no
     pop(&(h->dados[indice]), n);
 }
 
@@ -64,7 +64,12 @@ void pesquisaNaHash(hashFechada *h, int matricula, int(*cmpMatricula)(int, void 
     }
 }
 
-void exibeEstatisticas(hashFechada *h1, hashFechada *h2){
+/*
+A PARTIR DESTE PONTO COMEÇA AS FUNÇÕES DE ESTATISTICA
+*/
+
+
+void exibeEstatisticas(hashFechada *h1, hashFechada *h2){//chama as funções de exibir  as estatisticas para cada hash
     printf("\nEstas sao as estatisticas da Hash: 1");
     todasEstatisticas(h1);
 
@@ -72,11 +77,11 @@ void exibeEstatisticas(hashFechada *h1, hashFechada *h2){
     todasEstatisticas(h2);
 }
 
-void totalElementos(hashFechada *h){
+void totalElementos(hashFechada *h){//quantidade total de elementos
     printf("\nO total de elementos da Hash eh: %d", h->tamanho);
 }
 
-float mediaElementosIndice(hashFechada * h){
+float mediaElementosIndice(hashFechada * h){//quantidade média de elementos por índice
     int i;
     int totalNos=0;
     float media;
@@ -94,13 +99,13 @@ void descobreIndiceMaiorMenor(hashFechada * h){
     int elementosMaior = -1;
     int elementosMenor = 99999999;
     for(i=0; i<h->tamanho; i++){
-        if(h->dados[i].tam>elementosMaior){
+        if(h->dados[i].tam>elementosMaior){//índice com a maior quantidade de elementos
             maior=i;
-            elementosMaior=h->dados[i].tam;
+            elementosMaior=h->dados[i].tam;//quantidade de elementos desse índice
         }
-        if(h->dados[i].tam<elementosMenor){
+        if(h->dados[i].tam<elementosMenor){//índice com a menor quantidade de elementos
             menor=i;
-            elementosMenor=h->dados[i].tam;
+            elementosMenor=h->dados[i].tam;//quantidade de elementos desse índice
         }
     }
 
@@ -108,7 +113,7 @@ void descobreIndiceMaiorMenor(hashFechada * h){
     printf("\nO indice com o menor numero de elementos eh: %d, e ele possui %d elementos", menor, elementosMenor);
 }
 
-float calculaDesvioPadrao(hashFechada *h){
+float calculaDesvioPadrao(hashFechada *h){//desvio padrão da quantidade de elementos pelos índices
     int i;
     float media = mediaElementosIndice(h);
     float soma = 0;
@@ -120,7 +125,7 @@ float calculaDesvioPadrao(hashFechada *h){
     return desvioPadrao;
 }
 
-int indicesNoIntervalo(hashFechada *h){
+int indicesNoIntervalo(hashFechada *h){//quantos índices tem quantidade dentro do intervalo da média +/- o desvio padrão.
     int i;
     int quantidadeIndicesIntervalo = 0;
     for(i=0; i<h->tamanho; i++){
@@ -131,7 +136,7 @@ int indicesNoIntervalo(hashFechada *h){
     return quantidadeIndicesIntervalo;
 }
 
-void todasEstatisticas(hashFechada *h){
+void todasEstatisticas(hashFechada *h){//Printa as estatisticas
     totalElementos(h);
     printf("\nA media de elementos em cada indice eh: %.1f", mediaElementosIndice(h));
     descobreIndiceMaiorMenor(h);
