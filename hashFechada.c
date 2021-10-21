@@ -88,7 +88,7 @@ float mediaElementosIndice(hashFechada * h){//quantidade média de elementos por
     for(i=0; i<h->tamanho; i++){
         totalNos = totalNos + h->dados[i].tam;
     }
-    media=(float)(totalNos/h->tamanho);
+    media=((float)totalNos)/h->tamanho;
     return media;
 }
 
