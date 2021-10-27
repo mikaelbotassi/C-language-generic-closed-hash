@@ -122,14 +122,16 @@ float calculaDesvioPadrao(hashFechada *h){//desvio padrão da quantidade de elem
         soma=soma + pow((h->dados[i].tam - media), 2);
     }
     desvioPadrao=soma/h->tamanho;
-    return desvioPadrao;
+    return pow(desvioPadrao, 0.5);
 }
 
 int indicesNoIntervalo(hashFechada *h){//quantos índices tem quantidade dentro do intervalo da média +/- o desvio padrão.
     int i;
     int quantidadeIndicesIntervalo = 0;
+    float media = mediaElementosIndice(h);
+    float desvioPadrao = calculaDesvioPadrao(h);
     for(i=0; i<h->tamanho; i++){
-        if(h->dados[i].tam >= (mediaElementosIndice(h) - calculaDesvioPadrao(h)) && h->dados[i].tam <= (mediaElementosIndice(h) - calculaDesvioPadrao(h))){
+        if(h->dados[i].tam >= (media - desvioPadrao) && h->dados[i].tam <= (media + desvioPadrao)){
             quantidadeIndicesIntervalo++;
         }
     }
