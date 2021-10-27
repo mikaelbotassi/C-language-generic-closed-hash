@@ -23,6 +23,20 @@ node * nodeInitialized(){
 /*
 O push recebe o tipo de dado que irá armazenar no ID, o elemento e um ponteiro de função da biblioteca pessoa cujo nome é "cmp"
 */
+
+//POR FINS DE TESTES CRIEI UMA FUNÇÃO QUE SEMPRE INSERE NO INICIO
+void insereNoInicio(list *l, void *a){
+    node *novo = (node *) malloc(sizeof(node));
+    novo->elemen = a;
+    novo->id = 'A';
+    if (l->first==NULL) //Lista vazia
+        novo->prox=NULL;
+    else
+        novo->prox = l->first;
+    l->first = novo;
+    l->tam++;
+}
+
 void push(char id,list *l, void *elem, int(*comp)(char, node *, node *)){
     node *newNode=nodeInitialized();
     newNode->elemen=elem;
