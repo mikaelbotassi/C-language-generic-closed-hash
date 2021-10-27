@@ -24,8 +24,8 @@ int hashFunction (hashFechada* h, int chave){
 
 void inserirNaHashFechada(char id, hashFechada* h, void * a, int (*returnChave)(void *, char), int (*comp)(char, node *, node *)){
     int hashCode = hashFunction(h, returnChave(a, id)); //Vai passar o elemento void e a chave para a função e a função vai retornar a chave de inserção na tabela hash
-    insereNoInicio(&(h->dados[hashCode]), a);
-    //push(id, &(h->dados[hashCode]), a, comp); //Chama a função para inserção na lista
+    //insereNoInicio(&(h->dados[hashCode]), a);
+    push(id, &(h->dados[hashCode]), a, comp); //Chama a função para inserção na lista
 }
 
 void imprimirHashFechada(hashFechada* h, void (*print)(char, void *)){
