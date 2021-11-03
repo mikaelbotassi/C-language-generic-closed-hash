@@ -93,7 +93,6 @@ node * listSearch(list * l, int matricula, int(*cmpMatricula)(int, void *, char)
                 aux=aux->prox;
             }
         }
-        printf("\nO Aluno com esta matrícula não existe! ");
     }
     return aux;
 

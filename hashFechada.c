@@ -22,13 +22,13 @@ int hashFunction (hashFechada* h, int chave){
     return chave % h->tamanho;
 }
 
-void inserirNaHashFechada(char id, hashFechada* h, void * a, int (*returnChave)(void *, char), int (*comp)(char, node *, node *)){
+void inserirNaHashFechada(char id, hashFechada* h, void * a, RETURN_CHAVE, CMP){
     int hashCode = hashFunction(h, returnChave(a, id)); //Vai passar o elemento void e a chave para a função e a função vai retornar a chave de inserção na tabela hash
     //insereNoInicio(&(h->dados[hashCode]), a);
     push(id, &(h->dados[hashCode]), a, comp); //Chama a função para inserção na lista
 }
 
-void imprimirHashFechada(hashFechada* h, void (*print)(char, void *)){
+void imprimirHashFechada(hashFechada* h, PRINT_ALUNO){
     int i;
     for(i=0;i<h->tamanho;i++){
         if(h->dados[i].first!=NULL){
@@ -47,18 +47,19 @@ void excluiHashFechada(hashFechada* h){
     }
 }
 
-void excluiAlunoHashFechada(hashFechada *h, int matricula, int(*cmpMatricula)(int, void *, char)){
+void excluiAlunoHashFechada(hashFechada *h, int matricula, COMPARA_MATRICULAS_IGUAIS){
     int indice = hashFunction(h, matricula);
     node * n = listSearch(&(h->dados[indice]), matricula, cmpMatricula);;//chama a função da bibloteca lista procurando o aluno que tiver a matricula passada e retorna o no
     pop(&(h->dados[indice]), n);
 }
 
-void pesquisaNaHash(hashFechada *h, int matricula, int(*cmpMatricula)(int, void *, char), void(*print)(char, void *)){
+void pesquisaNaHash(hashFechada *h, int matricula, COMPARA_MATRICULAS_IGUAIS, PRINT_ALUNO){
     int indice= hashFunction(h, matricula);
-    printf("\nIndice:%d", indice);
+    printf("\nHASH DE %d INDICES\n", h->tamanho);
+    printf("\nIndice:%d\n", indice);
     node * n = listSearch(&(h->dados[indice]), matricula, cmpMatricula);
     if(n==NULL){
-        printf("\n ALUNO NAO ENCONTRADO! ");
+        printf("\nALUNO NAO ENCONTRADO!\n");
     }
     else{
         print(n->id, n->elemen);
@@ -71,10 +72,10 @@ A PARTIR DESTE PONTO COMEÇA AS FUNÇÕES DE ESTATISTICA
 
 
 void exibeEstatisticas(hashFechada *h1, hashFechada *h2){//chama as funções de exibir  as estatisticas para cada hash
-    printf("\nEstas sao as estatisticas da Hash: 1");
+    printf("\n\tESTAS SAO AS ESTATISTICAS DA HASH 1\n");
     todasEstatisticas(h1);
 
-    printf("\nEstas sao as estatisticas da Hash: 2");
+    printf("\n\tESTAS SAO AS ESTATISTICAS DA HASH 2\n");
     todasEstatisticas(h2);
 }
 
@@ -144,5 +145,5 @@ void todasEstatisticas(hashFechada *h){//Printa as estatisticas
     printf("\nA media de elementos em cada indice eh: %.1f", mediaElementosIndice(h));
     descobreIndiceMaiorMenor(h);
     printf("\nO desvio padrao da hash eh: %.1f", calculaDesvioPadrao(h));
-    printf("\n A quantidade de indices no intervalo eh: %d", indicesNoIntervalo(h));
+    printf("\nA quantidade de indices no intervalo eh: %d\n", indicesNoIntervalo(h));
 }
